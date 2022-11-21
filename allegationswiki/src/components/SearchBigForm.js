@@ -27,37 +27,6 @@ const useStyles = makeStyles({
   },
 });
 
-// const useStyles = makeStyles({
-//   root: {
-//     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-//       borderColor: "green",
-//     },
-//     "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-//       borderColor: "red",
-//     },
-//     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-//       borderColor: "purple",
-//     },
-//     "& .MuiOutlinedInput-input": {
-//       color: "green",
-//     },
-//     "&:hover .MuiOutlinedInput-input": {
-//       color: "red",
-//     },
-//     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
-//       color: "purple",
-//     },
-//     "& .MuiInputLabel-outlined": {
-//       color: "green",
-//     },
-//     "&:hover .MuiInputLabel-outlined": {
-//       color: "red",
-//     },
-//     "& .MuiInputLabel-outlined.Mui-focused": {
-//       color: "purple",
-//     },
-//   },
-// });
 
 const SearchBigForm = (user) => {
   const [searchedName, setSearchedName] = useState("");
@@ -137,11 +106,8 @@ const SearchBigForm = (user) => {
                     : "https://media.istockphoto.com/id/1220827245/vector/anonymous-gender-neutral-face-avatar-incognito-head-silhouette.jpg?s=612x612&w=0&k=20&c=GMdiPt_h8exnrAQnNo7dIKjwZyYqjH4lRQqV8AOx4QU="
                 }
               />
-              {/* {console.log("option", option)}  */}
               {"   "} {fullname} {"   "}
-              {fullname ? "   (" + fullname + ")" : ""}
-              {/* {console.log("props", props)} */}
-              {/* {console.log("options", {myOptions})} */}
+              {(perpdesc != 'NONE') && (perpdesc != null) ? "   (" + perpdesc + ")" : ""}
             </Box>
           )}
           renderInput={(params) => (

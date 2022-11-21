@@ -29,7 +29,6 @@ const getSpecificPerp = async (mywebid) => {
 
 const getRandomPerp = async () => {
   const { data, error, status } = await supabase.rpc("random_perp_test2");
-  console.log(data, error, status);
   if (error) return "Error - Random Perp Search failed";
   return data;
 };

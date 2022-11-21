@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useState } from "react";
 import Home from "./components/Home";
 import RequestNewForm from "./components/RequestNewForm";
 import PerpPage from "./components/PerpPage";
@@ -21,10 +22,13 @@ const App = () => {
   //State Declarations
   //Hooks
   //Sets xxxx
+  const [randomPerp, setRandomPerp] = useState("");
   const getRandomPerp = async () => {
     const myRandomPerp = await perpsService.getRandomPerp()
-    console.log(myRandomPerp)
+    setRandomPerp(myRandomPerp[0].webid)
   }
+
+
   const padding = {
     padding: 5,
     fontSize: 22,
@@ -55,18 +59,22 @@ const App = () => {
 
           <div className="header-gap-2"></div>
           <div className="header-request-new">
-            <Link style={showRandomTR} to="/Random">
+            <Link style={showRandomTR} onClick={getRandomPerp} to="/Random">
               Random Perp
             </Link>
           </div>
         </header>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Random" element={<PerpPage perpCode= {''} />} />
+          <Route
+            path="/Random"
+            element={<PerpPage key={randomPerp} perpCode={""} />}
+          />
           <Route
             path="/perp/:perpCode"
             element={<PerpPage perpCode={perpCode} />}
-          />``
+          />
+          ``
           <Route path="/ContactUs" element={<PerpPage perpCode={perpCode} />} />
         </Routes>
         <div className="bodyGap"></div>

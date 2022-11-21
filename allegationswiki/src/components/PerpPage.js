@@ -5,12 +5,13 @@ import PerpInfoCard from "./perpPage/PerpInfoCard";
 import { useDispatch } from "react-redux";
 import perpsService from "../services/perps";
 
-const PerpPage = ({ perpCode }) => {
+const PerpPage = ({perpCode}) => {
   
   const [perpInfo, setPerpInfo] = useState("");
+  
   useEffect(() => {
     let isMounted = true;
-    if (perpCode){
+    if (perpCode!==''){
     perpsService.getSpecificPerp(perpCode).then((myPerp) => {
       if (isMounted) setPerpInfo(myPerp[0]);
     })}
