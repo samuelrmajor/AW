@@ -1,29 +1,38 @@
-import axios from 'axios'
-const baseUrl = '/api/perps'
+import axios from "axios";
+import { supabase } from "./supabaseClient";
 
 
-const getPerpsAll = async () => {
-  const response = await axios.get('http://localhost:3003/data')
-  return response.data
+const getPerpsFiltered = async (myname) => {
+  const { data, error, status } = await supabase.rpc("filter_search_bar", {
+    myname
+  })
+  if (error) return 'Error - Filter Search failed'
+  return data
+};
+
+
+const getSpecificPerp = async (mywebid) => {
+  const { data, error, status } = await supabase.rpc("get_specific_perp", {
+    mywebid
+  })
+  const { data2, error2, status2 } = await supabase.rpc("increment_perp_view", {
+    mywebid,
+  });
+  if (error2) return 'invalid incriemnt'
+  if (error) return "Error - Perp Search failed";
+  return data;
+
+
 }
 
-const getPerpsFiltered = async (searchedName) => {
-  const response = await axios.get('http://localhost:3003/data')
-  return response.data
-}
-
-const getSpecificPerp = async (id) => {
-    const response = await axios.get('http://localhost:3003/data')
-    const myNames = await response.data
-    const myPerp = await myNames.find(perp => perp.id === Number(id))
-    if (myPerp) return myPerp
-    return "Not Found"
-
-}
 
 
-export default { getPerpsAll, getPerpsFiltered, getSpecificPerp}
+const getRandomPerp = async () => {
+  const { data, error, status } = await supabase.rpc("random_perp_test2");
+  console.log(data, error, status);
+  if (error) return "Error - Random Perp Search failed";
+  return data;
+};
 
+export default { getPerpsFiltered, getSpecificPerp, getRandomPerp };
 
-// const myNamesPromise = await fetch('http://localhost:3003/data')
-        
