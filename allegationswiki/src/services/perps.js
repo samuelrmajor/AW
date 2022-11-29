@@ -9,7 +9,7 @@ const getPerpsFiltered = async (myname) => {
   if (error) return 'Error - Filter Search failed'
   return data
 };
-
+//test
 
 const getSpecificPerp = async (mywebid) => {
   const { data, error, status } = await supabase.rpc("get_specific_perp", {
@@ -21,17 +21,25 @@ const getSpecificPerp = async (mywebid) => {
   if (error2) return 'invalid incriemnt'
   if (error) return "Error - Perp Search failed";
   return data;
-
-
 }
 
 
-
 const getRandomPerp = async () => {
-  const { data, error, status } = await supabase.rpc("random_perp_test2");
+  const { data, error, status } = await supabase.rpc("get_random_perp");
   if (error) return "Error - Random Perp Search failed";
   return data;
 };
 
-export default { getPerpsFiltered, getSpecificPerp, getRandomPerp };
+
+
+const votePerp = async (mywebid, myvote) => {
+  const { data, error, status } = await supabase.rpc("add_status_vote", {
+    myvote,
+    mywebid
+  });
+  if (error) return "Error - Vote failed";
+  return data;
+};
+
+export default { getPerpsFiltered, getSpecificPerp, getRandomPerp, votePerp};
 

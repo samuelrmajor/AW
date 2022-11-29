@@ -7,7 +7,6 @@ import PerpVotingComponent from "./PerpVotingComponent";
 
 const PerpInfoCard = ({ perpInfo, myPerpCancelled}) => {
 
-
   const imgBorderStyle = myPerpCancelled ? "#8B0000" : "#006400";
 
   //Style

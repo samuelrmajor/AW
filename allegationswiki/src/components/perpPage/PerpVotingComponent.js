@@ -7,12 +7,11 @@ const PerpVotingComponent = ({ perpInfo, myPerpCancelled}) => {
     const [perpVoteStage, setPerpVoteStage] = useState("Q1");
     const [displayQuestions, setDisplayQuestions] = useState(true)
 
-
   const handleQ1Click = async (event) =>{
     event.preventDefault();
     if (event.target.name === 'cancelledQ1') {
       setPerpVoteStage('Q2')
-      //TODO: Submit data to DB
+      const cancelledResponse = await perpsService.votePerp(perpInfo.webid, 0);
     }
 
     else {
@@ -22,10 +21,41 @@ const PerpVotingComponent = ({ perpInfo, myPerpCancelled}) => {
        }, 3000);
     }
 
+    if (event.target.name==='unsureQ1'){
+        const cancelledResponse = await perpsService.votePerp(perpInfo.webid, 1);
+    }
+
+    else if (event.target.name === "notCancelledQ1") {
+      const cancelledResponse = await perpsService.votePerp(perpInfo.webid, 2);
+    }
   }
 
   const handleQ2Click = async (event) => {
-      event.preventDefault();
+        event.preventDefault();
+
+        if (event.target.name === "sexualQ2") {
+          const cancelledResponse = await perpsService.votePerp(
+            perpInfo.webid,
+            3
+          );
+        }
+        else if (event.target.name === "domesticQ2") {
+          const cancelledResponse = await perpsService.votePerp(
+            perpInfo.webid,
+            4
+          );
+        }
+        else if (event.target.name === "discQ2") {
+          const cancelledResponse = await perpsService.votePerp(
+            perpInfo.webid,
+            5
+          );
+        } else {
+            const cancelledResponse = await perpsService.votePerp(
+              perpInfo.webid,
+              6
+            );
+        }
       setPerpVoteStage("Done");
       setTimeout(() => {
         setDisplayQuestions(false);
@@ -35,7 +65,7 @@ const PerpVotingComponent = ({ perpInfo, myPerpCancelled}) => {
 
     const handleQ3Click = async (event) => {
       event.preventDefault();
-      console.log(event.target.name);
+
       console.log("Clicked q3");
     };
 
